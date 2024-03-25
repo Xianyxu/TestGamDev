@@ -1,1 +1,22 @@
-{}
+{
+    "name": "InputManager",
+    "maps": [
+        {
+            "name": "Movement",
+            "id": "7f382327-42d3-4378-b524-c62b94d59828",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "a63537a2-e9d3-46a9-a77d-8c94396e57e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": []
+        }
+    ],
+    "controlSchemes": []
+}
