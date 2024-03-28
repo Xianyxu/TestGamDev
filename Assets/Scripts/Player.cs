@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float walkSpeed = 3f;
     [SerializeField] private float jumpForce_Y = 30f;
 
-    private Vector2 inputVector = new Vector3(0f, 0f);
+   
 
     private Rigidbody rb;
 
@@ -19,19 +19,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        Vector2 inputVector = new Vector2(0f, 0f);
 
         if (Input.GetKey(KeyCode.W))
         {
             inputVector.x = +1;
+            // Debug.Log("Pressing");
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.S))
         {
             inputVector.x = -1;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.A))
         {
             inputVector.y = +1;
         }
@@ -43,8 +44,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            jumpFunction(jumpForce_Y);
+            // jumpFunction(jumpForce_Y);
         }
+
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        transform.position += moveDir * Time.deltaTime * walkSpeed;
+        Debug.Log(moveDir);
     }
 
     private void jumpFunction(float jumpForce_Y)
