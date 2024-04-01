@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using GameDev1.Assets.Scripts.Code;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 7f;
     [SerializeField] private float jumpForce_Y = 30f;
     [SerializeField] private float sprintSpeed = 14f;
-
-
-
+    
     private Rigidbody rb;
 
     private void Start()
@@ -50,7 +49,7 @@ public class Player : MonoBehaviour
         }
 
 
-
+        Debug.Log(ConstantClass.HORIZONTAL);
 
 
 

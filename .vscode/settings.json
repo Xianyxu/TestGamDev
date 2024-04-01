@@ -61,12 +61,50 @@
   "editor.inlineSuggest.showToolbar": "always",
   "editor.suggest.insertMode": "replace",
   "editor.acceptSuggestionOnCommitCharacter": false,
-  "spellright.language": ["en"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext", "csharp"],
+  "spellright.language": [
+    "en"
+  ],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext",
+    "csharp"
+  ],
   "editor.autoClosingBrackets": "always",
   "cSpell.language": "en,en-GB,en-US,lorem",
   "unity-code-snippets.autoComplete.experimentalAttributes": true,
-  "cSpell.enableFiletypes": ["arduino-output", "arm"],
+  "cSpell.enableFiletypes": [
+    "arduino-output",
+    "arm"
+  ],
   "unity-code-snippets.style": "kr",
-  "unityToolbox.bracketsStyle": "same line, with space"
+  "unityToolbox.bracketsStyle": "same line, with space",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "Root",
+      "database": "vscode",
+      "username": "root"
+    },
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "gamedev1",
+      "database": "unity_gamedev1",
+      "username": "Xianyx"
+    }
+  ]
 }

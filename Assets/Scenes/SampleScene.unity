@@ -1269,7 +1269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9bf6cbd1bc0f542a69f638e410682c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1340649781}
   cameraDistanceFromGround: 3
   cameraDistanceFromTarget: 3
 --- !u!850595691 &349253859
@@ -6159,6 +6159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3
   jumpForce_Y: 30
+  sprintSpeed: 14
 --- !u!4 &1340649781
 Transform:
   m_ObjectHideFlags: 0
