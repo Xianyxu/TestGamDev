@@ -12,6 +12,9 @@ namespace GameDev1.Assets.Scripts.Code
         public const string MOUSE_X = "Mouse X";
         public const string MOUSE_Y = "Mouse Y";
         public const string MOVEMENT = "Movement";
+        public const string OTHER_PARAMETERS = "Other Parameters";
+        public const string GROUND_CHECK = "Ground Check";
+        public const float floatHalf = 0.5f;
 
     }
 }

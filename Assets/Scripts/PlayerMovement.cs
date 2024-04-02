@@ -6,11 +6,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header(ConstantClass.MOVEMENT)]
-    [SerializeField]private float moveSpeed;
-    [SerializeField]private Transform orientation;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private Transform orientation;
+    [SerializeField] private float groundDrag;
+    [SerializeField] private float forceMultiplier;
+
+    [Header(ConstantClass.GROUND_CHECK)]
+    [SerializeField] private float playerHeight;
+    [SerializeField] private LayerMask whatIsGround;
+
+    private bool grounded;
     private float horizontalInput;
     private float verticalInput;
-    private float forceMultiplier;
+    private float extraDistaceRaycast = 0.2f;
+
 
     private Vector3 moveDirection;
 
@@ -22,11 +31,24 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
-    private void Update() {
+    private void Update()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * ConstantClass.floatHalf + extraDistaceRaycast, whatIsGround);
+
         MyInput();
+
+        if (grounded)
+        {
+            rb.drag = groundDrag;
+        }
+        else
+        {
+            rb.drag = 0;
+        }
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         MovePlayer();
     }
 
@@ -36,11 +58,12 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw(ConstantClass.VERTICAL);
     }
 
-    private void MovePlayer(){
+    private void MovePlayer()
+    {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         rb.AddForce(moveDirection.normalized * moveSpeed * forceMultiplier, ForceMode.Force);
     }
 
-    
+
 }
