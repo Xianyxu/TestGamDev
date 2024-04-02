@@ -6,10 +6,9 @@ using UnityEngine;
 public class Follow_player : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private float cameraDistanceFromGround = System.Math.Abs(4f);
-    [SerializeField] private float cameraDistanceFromTarget = System.Math.Abs(3f);
+    [SerializeField] private float cameraDistanceFromGround = 4f;
+    [SerializeField] private float cameraDistanceFromTarget = 3f;
 
-    
 
     private void Update()
     {
