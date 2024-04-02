@@ -1,0 +1,3 @@
+- A dumpster fire, but a cold one --> this repo
+- I advise you to please ignore it.
+- (made it public because of the sole reason that, gitlens require a pro plan for private repos. What the fuck!!?)
