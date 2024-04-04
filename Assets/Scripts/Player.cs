@@ -5,16 +5,9 @@ using GameDev1.Assets.Scripts.Code;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float walkSpeed = 7f;
-    [SerializeField] private float jumpForce_Y = 30f;
-    [SerializeField] private float sprintSpeed = 14f;
-
-    private Rigidbody rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
     }
 
@@ -45,34 +38,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            jumpFunction(jumpForce_Y);
+            
         }
 
 
         Debug.Log(ConstantClass.HORIZONTAL);
 
 
-
-        inputVector = inputVector.normalized;
-        Vector3 moveDir = new Vector3(inputVector.y, 0f, inputVector.x);
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            transform.position += moveDir * Time.deltaTime * sprintSpeed;
-        }
-        else
-        {
-            transform.position += moveDir * Time.deltaTime * walkSpeed;
-        }
-
-
-        Debug.Log(moveDir);
-    }
-
-    private void jumpFunction(float jumpForce_Y)
-    {
-
-        Vector3 jumpForce = new Vector3(0f, jumpForce_Y, 0f);
-        rb.AddForce(jumpForce, ForceMode.Force);
     }
 }
