@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_companion : MonoBehaviour
+public class PlayerCompanion : MonoBehaviour
 {
     [SerializeField] private GameObject revolveAroundPlayer;
     [SerializeField] private float floatDistance = .5f;
