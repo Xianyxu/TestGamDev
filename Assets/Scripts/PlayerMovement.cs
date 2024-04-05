@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header(ConstantClass.MOVEMENT)]
-    [SerializeField] private float moveSpeed;
+    [Header("Movement")]
+    private float moveSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
     [SerializeField] private Transform orientation;
     [SerializeField] private float groundDrag;
     [SerializeField] private float movementForceMultiplier;
@@ -14,11 +16,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
 
-    [Header(ConstantClass.GROUND_CHECK)]
+    [Header("Crouching")]
+    [SerializeField] private float crouchSpeed;
+    [SerializeField] private float crouchYScale;
+    [SerializeField] private float startYScale;
+
+
+    [Header("Ground Check")]
     [SerializeField] private float playerHeight;
     [SerializeField] private LayerMask whatIsGround;
-
     private bool grounded;
+
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
@@ -27,12 +35,27 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybindings")]
     private KeyCode jumpKey = KeyCode.Space;
+    private KeyCode sprintKey = KeyCode.LeftShift;
+    private KeyCode crouchKey = KeyCode.LeftControl;
+
+    private MovementState state;
+    private enum MovementState
+    {
+        walking,
+        sprinting,
+        crouching,
+        air
+    }
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        readyToJump = true;
+
+        startYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -42,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+        StateHandler();
 
         if (grounded)
         {
@@ -69,6 +93,17 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyUp(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
         }
     }
 
@@ -111,5 +146,27 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void StateHandler()
+    {
+        if (grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+        else if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
+        else
+        {
+            state = MovementState.air;
+        }
+
+        if(Input.GetKey(crouchKey)){
+            
+        }
     }
 }

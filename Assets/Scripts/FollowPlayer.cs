@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Follow_player : MonoBehaviour
+public class FollowPlayer : _BaseFollowScript
 {
-    [SerializeField] private Transform player;
     [SerializeField] private float cameraDistanceFromGround = 4f;
     [SerializeField] private float cameraDistanceFromTarget = 3f;
 
@@ -14,10 +13,10 @@ public class Follow_player : MonoBehaviour
     {
         Vector3 cameraDistanceVector = new Vector3(0f, -cameraDistanceFromGround, cameraDistanceFromTarget);
 
-        Vector3 cameraPosition = player.transform.position - cameraDistanceVector;
+        Vector3 cameraPosition = positionToFollowFrom.transform.position - cameraDistanceVector;
         // cameraPosition = Vector3.ClampMagnitude(Vector3.zero, float.PositiveInfinity);
         Debug.Log($"Camera Position: {cameraPosition}, Camera Distance From Ground: {cameraDistanceFromGround}");
         transform.position = cameraPosition;
-        transform.LookAt(player);
+        transform.LookAt(positionToFollowFrom);
     }
 }

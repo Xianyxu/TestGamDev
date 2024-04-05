@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9bf6cbd1bc0f542a69f638e410682c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1340649781}
+  PositionToFollow: {fileID: 0}
   cameraDistanceFromGround: 3
   cameraDistanceFromTarget: 3
 --- !u!850595691 &349253859
@@ -6411,17 +6411,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a4d5f024dedfc42bd0ed22ef1f189e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
+  moveSpeed: 7
   orientation: {fileID: 1667232760}
-  groundDrag: 0.1
-  forceMultiplier: 0
+  groundDrag: 5
+  movementForceMultiplier: 2
   jumpForce: 0
-  jumpCooldown: 0
-  airMultiplier: 0
+  jumpCooldown: 0.25
+  airMultiplier: 1
   playerHeight: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &1459952980
 GameObject:
   m_ObjectHideFlags: 0
@@ -7240,6 +7240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949387647}
+  - component: {fileID: 1949387648}
   m_Layer: 0
   m_Name: PlayerCameraHolder
   m_TagString: Untagged
@@ -7263,6 +7264,19 @@ Transform:
   - {fileID: 1459952981}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1949387648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949387646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74cadf58184c9c4996749f39d186a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PositionToFollow: {fileID: 0}
 --- !u!1 &1979192533
 GameObject:
   m_ObjectHideFlags: 0
