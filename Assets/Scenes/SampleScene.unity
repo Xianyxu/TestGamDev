@@ -6229,7 +6229,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340649781}
-  - component: {fileID: 1340649780}
   - component: {fileID: 1340649782}
   - component: {fileID: 1340649783}
   m_Layer: 0
@@ -6239,18 +6238,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1340649780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340649779}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a011efe93eb864483e7e736d0385a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1340649781
 Transform:
   m_ObjectHideFlags: 0
@@ -6309,21 +6296,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a4d5f024dedfc42bd0ed22ef1f189e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
+  walkSpeed: 7
+  sprintSpeed: 10
   orientation: {fileID: 1667232760}
   groundDrag: 5
   movementForceMultiplier: 2
-  jumpForce: 0
+  jumpForce: 3
   jumpCooldown: 0.25
-  airMultiplier: 1
-  crouchSpeed: 0
+  airMultiplier: 2
+  crouchSpeed: 3
   crouchYScale: 0
   startYScale: 0
-  playerHeight: 0
+  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
 --- !u!1 &1459952980
 GameObject:
   m_ObjectHideFlags: 0
