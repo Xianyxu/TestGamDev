@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class FollowPlayer : _BaseFollowScript
+public class FollowPlayer : MonoBehaviour
 {
+    [SerializeField] private Transform positionToFollowFrom;
     [SerializeField] private float cameraDistanceFromGround = 4f;
     [SerializeField] private float cameraDistanceFromTarget = 3f;
 

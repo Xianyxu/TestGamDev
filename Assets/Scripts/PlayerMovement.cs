@@ -13,7 +13,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDrag;
     [SerializeField] private float movementForceMultiplier;
     [SerializeField] private float jumpForce;
+
+    [Header("Jumping")]
     [SerializeField] private float jumpCooldown;
+    private bool readyToJump;
     [SerializeField] private float airMultiplier;
 
     [Header("Crouching")]
@@ -30,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
-    private bool readyToJump;
+
     private Rigidbody rb;
 
     [Header("Keybindings")]
@@ -165,8 +168,9 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.air;
         }
 
-        if(Input.GetKey(crouchKey)){
-            
+        if (Input.GetKey(crouchKey))
+        {
+
         }
     }
 }

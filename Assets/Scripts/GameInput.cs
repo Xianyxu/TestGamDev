@@ -4,9 +4,4 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
-    // private InputManager inputManager;
-
-    private void Start() {
-        
-    }
 }
