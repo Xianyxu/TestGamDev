@@ -6301,16 +6301,16 @@ MonoBehaviour:
   orientation: {fileID: 1667232760}
   groundDrag: 5
   movementForceMultiplier: 2
-  jumpForce: 3
   jumpCooldown: 0.25
-  airMultiplier: 2
+  airMultiplier: 0.4
+  jumpForce: 12
   crouchSpeed: 3
-  crouchYScale: 0
-  startYScale: 0
+  crouchYScale: 0.5
   playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  maxSlopeAngle: 0
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
