@@ -1340,13 +1340,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280257535}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1459952981}
-  m_Father: {fileID: 1949387647}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &280257537
 MonoBehaviour:
@@ -4947,7 +4947,7 @@ GameObject:
   - component: {fileID: 1008424497}
   - component: {fileID: 1008424496}
   - component: {fileID: 1008424495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6515,8 +6515,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a4d5f024dedfc42bd0ed22ef1f189e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 7
   orientation: {fileID: 1667232760}
+  groundDrag: 2
+  playerHeight: 1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1367561118
 GameObject:
   m_ObjectHideFlags: 0
@@ -8037,9 +8042,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 280257536}
-  - {fileID: 1969246482}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969246481
@@ -8066,13 +8069,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969246481}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.04, z: -4.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2033942698}
-  m_Father: {fileID: 1949387647}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1979192533
 GameObject:
@@ -11648,6 +11651,8 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1340649781}
   - {fileID: 1008424498}
+  - {fileID: 1969246482}
+  - {fileID: 280257536}
   - {fileID: 1949387647}
   - {fileID: 448707745}
   - {fileID: 611215033}
