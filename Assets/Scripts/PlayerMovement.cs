@@ -14,13 +14,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
     [SerializeField] private float forceMultiplier;
-    private bool readyToJump;
+    private bool readyToJump = true;
 
 
     [Header("Ground Check")]
     [SerializeField] private float playerHeight;
     [SerializeField] private LayerMask whatIsGround;
-    private bool grounded;
+    private bool grounded = true;
 
 
     [Header("KeyBindings")]
@@ -41,12 +41,20 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // ground Check
-        float raycastDeltaAdd = .2f;
+        float raycastDeltaAdd = 0.2f;
         grounded = Physics.Raycast(transform.position, Vector3.down,
-                             playerHeight * ConstantClass.floatHalf + raycastDeltaAdd, whatIsGround);
-        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + playerHeight * ConstantClass.floatHalf + raycastDeltaAdd);
+                             raycastDeltaAdd, whatIsGround);
+
+
+        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + playerHeight + raycastDeltaAdd +
+                          "   readu to jump status:" + readyToJump);
+        Debug.DrawRay(transform.position, Vector3.down);
 
         Console.WriteLine("new LIne");
+
+        MyInput();
+        SpeedControl();
+
         // handle drag
         if (grounded)
         {
@@ -57,10 +65,6 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = 0;
         }
 
-
-
-        MyInput();
-        SpeedControl();
     }
 
     private void FixedUpdate()
@@ -73,15 +77,15 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw(ConstantClass.HORIZONTAL);
         verticalInput = Input.GetAxisRaw(ConstantClass.VERTICAL);
 
-        
+
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
-            
+
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-        
+
     }
 
     private void MovePlayer()
