@@ -41,16 +41,15 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // ground Check
-        float raycastDeltaAdd = 0.2f;
-        grounded = Physics.Raycast(transform.position, Vector3.down,
+        float raycastDeltaAdd = 0.5f;
+        grounded = Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down,
                              raycastDeltaAdd, whatIsGround);
 
 
-        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + playerHeight + raycastDeltaAdd +
+        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + raycastDeltaAdd +
                           "   readu to jump status:" + readyToJump);
-        Debug.DrawRay(transform.position, Vector3.down);
+        Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down * raycastDeltaAdd, Color.black);
 
-        Console.WriteLine("new LIne");
 
         MyInput();
         SpeedControl();
