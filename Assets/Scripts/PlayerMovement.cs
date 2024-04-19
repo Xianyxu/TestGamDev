@@ -7,14 +7,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed;
+    private float moveSpeed;
+    [SerializeField] private float walkSpeed;
+    [SerializeField] private float sprintSpeed;
     [SerializeField] private Transform orientation;
     [SerializeField] private float groundDrag;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
     [SerializeField] private float airMultiplier;
     [SerializeField] private float forceMultiplier;
-    private bool readyToJump = true;
+    private bool readyToJump;
+    [SerializeField] private float crouchSpeed;
+    [SerializeField] private float crouchScale;
+    private float startYScale;
 
 
     [Header("Ground Check")]
@@ -25,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("KeyBindings")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
 
     private float horizontalInput;
@@ -32,27 +39,44 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
     Rigidbody rb;
 
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        crouching,
+        onAir,
+    }
+
+    [Header("StateMachine")]
+    [SerializeField] protected MovementState state;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        readyToJump = true;
+
+        startYScale = transform.localScale.y;
     }
 
     private void Update()
     {
         // ground Check
-        float raycastDeltaAdd = 0.5f;
+        float raycastMaxDistance = 0.5f;
         grounded = Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down,
-                             raycastDeltaAdd, whatIsGround);
+                             raycastMaxDistance, whatIsGround);
 
 
-        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + raycastDeltaAdd +
+        Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + raycastMaxDistance +
                           "   readu to jump status:" + readyToJump);
-        Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down * raycastDeltaAdd, Color.black);
+        Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down * raycastMaxDistance, Color.black);
 
 
         MyInput();
         SpeedControl();
+        StateHandler();
 
         // handle drag
         if (grounded)
@@ -85,6 +109,34 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.lossyScale.x, crouchScale, transform.localScale.z);
+            rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        }
+        if (Input.GetKeyDown(crouchKey))
+        {
+            transform.localScale = new Vector3(transform.lossyScale.x, startYScale, transform.localScale.z);
+        }
+
+    }
+
+    private void StateHandler()
+    {
+        if (grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+        else if (grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
+        else
+        {
+            state = MovementState.onAir;
+        }
     }
 
     private void MovePlayer()
