@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + raycastMaxDistance +
-                          "   readu to jump status:" + readyToJump);
+                          "   readu to jump status:" + readyToJump + "   state: " + state);
         Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down * raycastMaxDistance, Color.black);
 
 
@@ -114,8 +114,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(transform.lossyScale.x, crouchScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }
-        if (Input.GetKeyDown(crouchKey))
-        {
+        if (Input.GetKeyUp(crouchKey)){
             transform.localScale = new Vector3(transform.lossyScale.x, startYScale, transform.localScale.z);
         }
 
@@ -123,7 +122,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
-        if (grounded && Input.GetKey(sprintKey))
+        if (Input.GetKeyDown(crouchKey))
+        {
+            state = MovementState.crouching;
+            moveSpeed = crouchSpeed;
+        }
+        else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
