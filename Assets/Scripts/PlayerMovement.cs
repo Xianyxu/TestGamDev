@@ -20,12 +20,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeed;
     [SerializeField] private float crouchScale;
     private float startYScale;
+    private float raycastMaxDistance = 0.5f;
 
 
     [Header("Ground Check")]
     [SerializeField] private float playerHeight;
     [SerializeField] private LayerMask whatIsGround;
     private bool grounded = true;
+
+    [Header("Slope Handling")]
+    [SerializeField] private float maxSlopeAngle;
+    private RaycastHit slopeHit;
 
 
     [Header("KeyBindings")]
@@ -64,13 +69,13 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         // ground Check
-        float raycastMaxDistance = 0.5f;
         grounded = Physics.Raycast(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down,
                              raycastMaxDistance, whatIsGround);
 
 
         Debug.Log("grounded status after raycast:  " + grounded + " MaxDistance: " + raycastMaxDistance +
-                          "   readu to jump status:" + readyToJump + "   state: " + state);
+                          "   readu to jump status:" + readyToJump + "   state: " + state + "   movement speed: " + moveSpeed);
+
         Debug.DrawRay(transform.position + new Vector3(0f, 0.2f, 0.1f), Vector3.down * raycastMaxDistance, Color.black);
 
 
@@ -114,7 +119,8 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(transform.lossyScale.x, crouchScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
         }
-        if (Input.GetKeyUp(crouchKey)){
+        if (Input.GetKeyUp(crouchKey))
+        {
             transform.localScale = new Vector3(transform.lossyScale.x, startYScale, transform.localScale.z);
         }
 
@@ -147,7 +153,10 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-
+        if (OnSlope())
+        {
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+        }
 
         // on ground
         if (grounded)
@@ -187,5 +196,22 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private bool OnSlope()
+    {
+
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, raycastMaxDistance))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
+
+        return false;
+    }
+
+    private Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
